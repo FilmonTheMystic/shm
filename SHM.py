@@ -48,8 +48,15 @@ st.header("Strain VS Time")
 st.scatter_chart(
     cleaned_df_v2,
     x = 'UTC DateTime',
-    y = cleaned_df_v2.columns[1:],
-    height=440
+    y = cleaned_df_v2.columns[2:],
+    height = 440
+)
+st.header("Temperature VS Time")
+st.scatter_chart(
+    cleaned_df_v2,
+    x = 'UTC DateTime',
+    y = cleaned_df_v2.columns[1],
+    height = 440
 )
 
 #Dataframe info
