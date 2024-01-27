@@ -3,7 +3,7 @@ name: git-auto-commit
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
 
 jobs:
