@@ -1,9 +1,9 @@
-name: Format
+name: Auto-Commit
 
 on: push
 
 jobs:
-  format-code:
+  auto-commit:
     runs-on: ubuntu-latest
 
     permissions:
