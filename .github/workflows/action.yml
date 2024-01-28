@@ -1,27 +1,20 @@
-name: git-auto-commit
+name: Format
 
-on:  push
+on: push
 
 jobs:
-  git-auto-commit:
+  format-code:
     runs-on: ubuntu-latest
 
     permissions:
-      # Give the default GITHUB_TOKEN write permission.
-      # https://github.blog/changelog/2023-02-02-github-actions-updating-the-default-github_token-permissions-to-read-only/
+      # Give the default GITHUB_TOKEN write permission to commit and push the
+      # added or changed files to the repository.
       contents: write
 
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-    - name: Use git-auto-commit-action
-      id: "auto-commit-action"
-      uses: ./
+      # Other steps that change files in the repository
 
-    - name: "no changes detected"
-      if: steps.auto-commit-action.outputs.changes_detected == 'false'
-      run: "echo \"No changes detected\""
-
-    - name: "changes detected"
-      if: steps.auto-commit-action.outputs.changes_detected == 'true'
-      run: "echo \"Changes detected\""
+      # Commit all changed files back to the repository
+      - uses: stefanzweifel/git-auto-commit-action@v5
