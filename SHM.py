@@ -65,8 +65,8 @@ st.scatter_chart(
 )
 
 #Descriptive Statistics | average strain and temperature
-temperature_average = cleaned_df_v2[1].mean
-st.metric(label="Average Temperature", value=temperature_average)
+#temperature_average = cleaned_df_v2[1].mean
+#st.metric(label="Average Temperature", value=temperature_average)
 
 #Dataframe info
 cleaned_df_v2.info()
