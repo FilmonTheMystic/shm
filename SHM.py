@@ -4,6 +4,7 @@ Created on Thu Oct 19 10:34:25 2023
 
 @author: Filmon Teweldemedhin Gebremichael
 """
+# IMPORT LIBRARIES
 
 import streamlit as st
 import numpy as np
@@ -11,10 +12,18 @@ import pandas as pd
 import glob
 import warnings
 
+# Page Configuration
+st.set_page_config(
+    page_title= "UJ Photonics Lab Dashboard",
+    page_icon= "📊",
+    layout= "wide"
+)
+
 warnings.filterwarnings('ignore')
 
 files = glob.glob('data/*.txt')
 
+# Create an empty list to contain every data in the files
 li = []
 
 for f in files:
@@ -22,6 +31,7 @@ for f in files:
     li.append(temp_df)
     print(f'Successfully created dataframe for {f} with shape {temp_df.shape}')
 
+# Concatenate all data from every file into this single data frame
 df = pd.concat(li, axis=0, ignore_index=True)
 print(df.shape)
 st.header("Raw data")
