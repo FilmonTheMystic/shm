@@ -37,23 +37,25 @@ df = pd.concat(li, axis=0, ignore_index=True)
 #st.header("Raw data")
 #df
 
-#Data from Channel 0 only
+# Data from Channel 0 only
 ch0_df = df.iloc[:, :12]
 
-#Clean rows with NaN values
+# Clean rows with NaN values
 cleaned_df = ch0_df.dropna(axis=0, how='any')
 
-#Concatenate UTC Date and UTC Time 
+# Concatenate UTC Date and UTC Time 
 cleaned_df['Sample'] = pd.to_datetime(cleaned_df['UTC Date'] + ' ' + cleaned_df['UTC Time'])
+
+
 cleaned_df.rename(columns={'Sample':'UTC DateTime'}, inplace=True)
 
-#Drop redundant columns now that UTC DateTime is created
+# Drop redundant columns now that UTC DateTime is created
 cleaned_df_v2 = cleaned_df.drop('UTC Date', axis=1)
 cleaned_df_v2 = cleaned_df_v2.drop('UTC Time', axis=1)
 st.header("Cleaned Data")
 cleaned_df_v2
 
-#Plotting the wide dataframe
+# Plotting the wide dataframe
 st.header("Strain VS Time")
 st.scatter_chart(
     cleaned_df_v2,
@@ -62,8 +64,9 @@ st.scatter_chart(
     height = 440
 )
 
-#Descriptive Statistics
-
+#Descriptive Statistics | average strain and temperature
+temperature_average = cleaned_df_v2[1].mean
+st.metric(label="Average Temperature", value=temperature_average)
 
 #Dataframe info
 cleaned_df_v2.info()
