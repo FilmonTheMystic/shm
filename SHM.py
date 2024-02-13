@@ -33,9 +33,9 @@ for f in files:
 
 # Concatenate all data from every file into this single data frame
 df = pd.concat(li, axis=0, ignore_index=True)
-print(df.shape)
-st.header("Raw data")
-df
+#print(df.shape)
+#st.header("Raw data")
+#df
 
 #Data from Channel 0 only
 ch0_df = df.iloc[:, :12]
@@ -61,6 +61,9 @@ st.scatter_chart(
     y = cleaned_df_v2.columns[2:],
     height = 440
 )
+
+#Descriptive Statistics
+
 
 #Dataframe info
 cleaned_df_v2.info()
