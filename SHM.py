@@ -19,6 +19,8 @@ st.set_page_config(
     layout= "wide"
 )
 
+
+
 warnings.filterwarnings('ignore')
 
 files = glob.glob('data/*.txt')
@@ -52,21 +54,28 @@ cleaned_df.rename(columns={'Sample':'UTC DateTime'}, inplace=True)
 # Drop redundant columns now that UTC DateTime is created
 cleaned_df_v2 = cleaned_df.drop('UTC Date', axis=1)
 cleaned_df_v2 = cleaned_df_v2.drop('UTC Time', axis=1)
-st.header("Cleaned Data")
-cleaned_df_v2
 
-# Plotting the wide dataframe
-st.header("Strain VS Time")
-st.scatter_chart(
-    cleaned_df_v2,
-    x = 'UTC DateTime',
-    y = cleaned_df_v2.columns[2:],
-    height = 440
-)
+# Dashboard layout
+col = st.columns((4, 4, 1), gap='medium')
 
-#Descriptive Statistics | average strain and temperature
-temperature_average = cleaned_df_v2[1].mean
-st.metric(label="Average Temperature", value=temperature_average)
+with col[0]:
+    st.markdown('## Cleaned Data')
+    cleaned_df_v2
+
+with col[1]:
+    # Plotting the wide dataframe
+    st.markdown('## Strain VS Time')
+    st.scatter_chart(
+        cleaned_df_v2,
+        x = 'UTC DateTime',
+        y = cleaned_df_v2.columns[2:],
+        height = 440
+    )
+with col[2]:
+    #Descriptive Statistics | average strain and temperature
+    temperature_average = cleaned_df_v2.iloc[:, 1:2].mean()
+    print(temperature_average)
+    st.metric(label="Average Temperature", value=round(temperature_average, 4))
 
 #Dataframe info
 cleaned_df_v2.info()
