@@ -73,9 +73,9 @@ with col[1]:
     )
 with col[2]:
     #Descriptive Statistics | average strain and temperature
-    temperature_average = cleaned_df_v2.iloc[:, 1:2].mean()
-    print(temperature_average)
-    st.metric(label="Average Temperature", value=round(temperature_average, 4))
+    strain_1_average = cleaned_df_v2.iloc[:, 2:3].mean()
+    print(strain_1_average)
+    st.metric(label="Average Strain 1", value=round(strain_1_average, 4))
 
 #Dataframe info
 cleaned_df_v2.info()
